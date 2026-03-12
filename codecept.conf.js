@@ -14,7 +14,11 @@ exports.config = {
       browser: 'chromium',
       url: 'https://www.saucedemo.com',
       show: true
-    }
+    },
+    REST: {
+       endpoint:'https://jsonplaceholder.typicode.com'
+    },
+    JSONResponse:{},
   },
   include: {
     I: './steps_file.js',

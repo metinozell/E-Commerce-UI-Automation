@@ -1,0 +1,31 @@
+name: Otomatik Test Pipeline (CI)
+
+#Hangi durumda çalışacak? 'main' dalina kod push edildliginde.
+on:
+  push:
+    branches:["main"]
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    -name: 1.Kodlari Klonla (Checkout)
+    uses: actions/checkout@v4
+
+    -name: 2.Node.js Kurulumu
+    uses: actions/setup-node@v4
+    with:
+      node-version: '20'
+
+    -name: 3.Kutuphaneleri Yukle (npm install)
+    run: npm install
+
+    -name: 4.Playwright Test Tarayıclarını Kur
+    run: npx playwright install
+
+    -name: 5. CodeceptJS Testlerini Calistir!
+    # Bulut sunucuda ekran olmadigi icin HEADLESS=true diyerek arkaplanda (hayalet modda) calistiriyoruz
+    env:
+      HEADLESS: true
+    run: npx codeceptjs run --steps
+
